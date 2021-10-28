@@ -139,7 +139,6 @@ class BaseRepository implements EloquentRepositoryInterface
             $erros = json_encode($validator->errors()->getMessages());
             throw new Exception($erros, 400);
         }
-        dd($payload);
         $model = $this->model->create($payload);
         return $model->fresh();
     }
