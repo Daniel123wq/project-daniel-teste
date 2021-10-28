@@ -32,9 +32,10 @@ class ProdutoRepository extends BaseRepository implements ProdutoRepositoryInter
     public function getRulesCreate(): array
     {
         return [
-            'loja_id' => 'exists:App\Models\Loja,id|integer'
-            // 'email' => 'unique:lojas|email',
-            // 'nome' => 'min:3|max:40'
+            'nome' => 'min:3|max:60',
+            'valor' => 'min:3|max:6|integer',
+            'loja_id' => 'exists:App\Models\Loja,id|integer',
+            'ativo' => 'boolean',
         ];
     }
     /**
@@ -45,8 +46,10 @@ class ProdutoRepository extends BaseRepository implements ProdutoRepositoryInter
     public function getRulesUpdate(): array
     {
         return [
-            // 'email' => [Rule::unique('lojas', 'email')->ignore($this->model->id), 'email'],
-            // 'nome' => 'min:3|max:40'
+            'nome' => 'min:3|max:60',
+            'valor' => 'min:3|max:6|integer',
+            'loja_id' => 'exists:App\Models\Loja,id|integer',
+            'ativo' => 'boolean',
         ];
     }
 }
