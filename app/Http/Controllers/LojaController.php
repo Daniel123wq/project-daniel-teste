@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Repository\LojaRepositoryInterface;
-use Symfony\Component\HttpFoundation\Response;
 
 class LojaController extends Controller
 {
@@ -17,13 +16,12 @@ class LojaController extends Controller
 
     public function index () 
     {
-        return response()->json(['asdads']);
-        // return response()->json($this->lojaRepository->all(
-        //     request()->input('columns', ['*']),
-        //     request()->input('relations', []),
-        //     request()->input('per-page', 25),
-        //     request()->input('page') ? true : false,
-        // ), 200);
+        return response()->json($this->lojaRepository->all(
+            request()->input('columns', ['*']),
+            request()->input('relations', []),
+            request()->input('per-page', 25),
+            request()->input('page') ? true : false,
+        ), 200);
     }
 
     /**
