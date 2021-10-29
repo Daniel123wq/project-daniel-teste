@@ -2,7 +2,7 @@
 Api responsável pela solução do problema do processo seletivo.
 
 # ENDPOINT
-https://dasdrasys.com.br/projeto-daniel-teste
+https://dasdrasys.com.br/projeto-daniel-teste/api
 
 A documentação você pode encontrar aqui: https://documenter.getpostman.com/view/5610670/UV5f7Dvr
 
