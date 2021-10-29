@@ -57,7 +57,7 @@ class BaseRepository implements EloquentRepositoryInterface
      */
     public function all(array $columns = ['*'], array $relations = [], int $perPage = 25, bool $hasPagination = false): Collection
     {
-        if ($relations){
+        if ($relations) {
             $columns = array_merge($columns, ['id']);
         }
         $query = $this->model->with($relations);
@@ -91,10 +91,9 @@ class BaseRepository implements EloquentRepositoryInterface
         array $columns = ['*'],
         array $relations = [],
         array $appends = []
-    ): ?Model
-    {
+    ): ?Model {
         try {
-            if ($relations){
+            if ($relations) {
                 $columns = array_merge($columns, ['id']);
             }
             $this->model = $this->model->select($columns)->with($relations)->findOrFail($modelId)->append($appends);
@@ -132,7 +131,7 @@ class BaseRepository implements EloquentRepositoryInterface
      * @param array $payload
      * @return Model
      */
-    public function create(Array $payload): ?Model
+    public function create(array $payload): ?Model
     {
         $validator = Validator::make($payload, $this->getRulesCreate());
         if ($validator->fails()) {
@@ -140,6 +139,9 @@ class BaseRepository implements EloquentRepositoryInterface
             throw new Exception($erros, 400);
         }
         $model = $this->model->create($payload);
+        if ($model) {
+            $this->created();
+        }
         return $model->fresh();
     }
 
@@ -158,9 +160,13 @@ class BaseRepository implements EloquentRepositoryInterface
             $erros = json_encode($validator->errors()->getMessages());
             throw new Exception($erros, 400);
         }
-        return $this->model->update($payload);
+        $bool = $this->model->update($payload);
+        if ($bool) {
+            $this->updated();
+        }
+        return $bool;
     }
-    
+
     /**
      * Delete model by id
      * 
@@ -192,5 +198,44 @@ class BaseRepository implements EloquentRepositoryInterface
     public function permanentlyDeleteById(int $modelId): bool
     {
         return $this->findTrashedById($modelId)->forceDelete();
+    }
+
+
+    /**
+     * Handle the Model "created" event.
+     *
+     * @return void
+     */
+    public function created(): void
+    {
+    }
+
+    /**
+     * Handle the Model "updated" event.
+     *
+     * @return void
+     */
+    public function updated(): void
+    {
+    }
+
+    /**
+     * Handle the Model "deleted" event.
+     *
+     * @return void
+     */
+    public function deleted(): void
+    {
+        //
+    }
+
+    /**
+     * Handle the Model "forceDeleted" event.
+     *
+     * @return void
+     */
+    public function forceDeleted(): void
+    {
+        //
     }
 }

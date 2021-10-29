@@ -97,4 +97,39 @@ interface EloquentRepositoryInterface
      * @return bool
      */
     public function permanentlyDeleteById(int $modelId): bool;
+
+
+    
+
+    // /**
+    //  * Handle the Model "created" event.
+    //  *
+    //  * @param  Model  $model
+    //  * @return void
+    //  */
+    // public function created(Model $model): void;
+
+    // /**
+    //  * Handle the Model "updated" event.
+    //  *
+    //  * @param  Model  $model
+    //  * @return void
+    //  */
+    // public function updated(Model $model): void;
+
+    // /**
+    //  * Handle the Model "deleted" event.
+    //  *
+    //  * @param  Model  $model
+    //  * @return void
+    //  */
+    // public function deleted(Model $model): void;
+
+    // /**
+    //  * Handle the Model "forceDeleted" event.
+    //  *
+    //  * @param  Model  $model
+    //  * @return void
+    //  */
+    // public function forceDeleted(Model $model): void;
 }

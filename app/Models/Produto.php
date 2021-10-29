@@ -24,4 +24,16 @@ class Produto extends Model
     {
         return $this->belongsTo(Loja::class);
     }
+
+    /**
+     * get valor formated.
+     * TODO implementing mutate with repository and money formmater
+     * 
+     * @param  string  $value
+     * @return string
+     */
+    public function getValorAttribute($value)
+    {
+        return "R$ ".number_format($value,'2',',','.');
+    }
 }
